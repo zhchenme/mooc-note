@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+    <!-- 配置 Shiro 的 Web 过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="login.jsp" />
+        <property name="unauthorizedUrl" value="403.jsp" />
+        <property name="successUrl" value="index.jsp" />
+        <!--<property name="filters">
+            <util:map>
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
+            </util:map>
+        </property>-->
+        <!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!-- 设置登录页与登录路由可以匿名访问，实际开发过程中对于静态资源的访问也应该设置成 anon -->
+                /login.jsp = anon
+                /login = anon
+                /testRole = roles["admin"]
+                /testPer = perms["update"]
+                <!-- 
+                    设置所有的URL都必须要认证过后才可以登录 
+                    *：用于匹配零个或多个字符串
+                    **：用于匹配路径中的零个或多个路径   
+                -->
+                /** = authc
+            </value>
+        </property>
+    </bean>
+    
+    <!-- 创建 DefaultWebSecurityManager 对象-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="realm" />
+    </bean>
+    
+    <!-- 配置自定义 Realm -->
+    <bean id="realm" class="com.jas.realm.MyRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher" />
+    </bean>
+    
+    <!-- 设置 Shiro 加盐策略 -->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5" />
+        <property name="hashIterations" value="1" />
+    </bean>
+</beans>
