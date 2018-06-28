@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
-       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
     
     <!-- 配置 Shiro 的 Web 过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -10,11 +10,6 @@
         <property name="loginUrl" value="login.jsp" />
         <property name="unauthorizedUrl" value="403.jsp" />
         <property name="successUrl" value="index.jsp" />
-        <!--<property name="filters">
-            <util:map>
-                <entry key="authc" value-ref="formAuthenticationFilter"/>
-            </util:map>
-        </property>-->
         <!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
         <property name="filterChainDefinitions">
             <value>

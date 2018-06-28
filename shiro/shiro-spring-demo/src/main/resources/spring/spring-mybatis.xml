@@ -34,11 +34,4 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.jas.dao"></property>
     </bean>
-
-    <!-- 5.配置事务管理器 -->
-    <bean id="dataSourceTransactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <!-- 配置数据源 -->
-        <property name="dataSource" ref="druidDataSource"></property>
-    </bean>
 </beans>
