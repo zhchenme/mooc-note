@@ -1,12 +1,17 @@
-# shiro
+## Shiro 的特点
+<img src="https://shiro.apache.org/assets/images/ShiroFeatures.png"><br>
+四个主要基石
+ - **Authentication**：登录，验证用户的登录信息
+ - **Authorization**：访问流程的控制，即用户登录成功后具有的角色与权限
+ - **Session Management**：管理用户的会话
+ - **Cryptography**：通过某种加密算法保证数据的安全
 
-## shiro-demo
+在不同的环境下 Shiro 也提供了支持，比如 WEB 应用，缓存，并发等。
 
-测试了几种常用的 <code>Realm</code> 与自定义 <code>Realm</code>，用来熟悉 Shiro 的开发流程，shiro.sql 是测试 JdbcRealm 时需要的数据库文件。
+## Shiro 的认证流程
 
-## shiro-spring-demo
-
-Shiro 与 ssm（Spring、SpringMVC、MyBatis） 整合的 demo，通过自定义 Realm 对用户信息认证、角色管理、权限管理进行了测试，可以说是一个完整且实用的入门例子。
-
-整理了复杂的配置文件，相关的测试代码也传了上来，shiro.sql 是依赖的数据库文件（包括表结构与数据），希望能够为你提供一些便利。下面是一张测试图<br>
-<img src="https://s1.ax1x.com/2018/06/27/PP7Uu6.png" alt="PP7Uu6.png" border="0" />
+ 1. 通过 `SecurityUtils.getSubject()` 方法，获取当前 Subject 对象 
+ 2. 调用 `subject.isAuthenticated()` 方法，判断用户是否已经被认证，若没有认证，将用户信息（在 Controller 中获取前端表单中的数据）封装成 `UsernamePasswordToken` 对象
+ 3. 调用 `subject.login(token);` 方法执行认证动作，这个动作通常有相应的异常处理
+ 4. 自定义 `Realm`，获取到用户名，根据用户名获取到该用户的登录信息（密码等），返回给 Shiro
+ 5. 由 Shiro 完成用户信息的认证
