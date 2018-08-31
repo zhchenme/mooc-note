@@ -18,3 +18,7 @@ Shiro 与 ssm（Spring、SpringMVC、MyBatis） 整合的 demo，通过自定义
 整理了复杂的配置文件，相关的测试代码也传了上来，shiro.sql 是依赖的数据库文件（包括表结构与数据），希望能够为你提供一些便利。下面是一张测试图<br>
 <img src="https://s1.ax1x.com/2018/06/27/PP7Uu6.png" alt="PP7Uu6.png" border="0" /><br>
 慕课网链接：https://www.imooc.com/learn/977
+
+更新：
+
+Spring Boot 整合 Shiro 完成认证与授权的 demo，使用 Redis 进行会话管理。内容非常全，可以应用到实际的项目中去。
