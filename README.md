@@ -21,4 +21,6 @@ Shiro 与 ssm（Spring、SpringMVC、MyBatis） 整合的 demo，通过自定义
 
 更新：
 
-Spring Boot 整合 Shiro 完成认证与授权的 demo，使用 Redis 进行会话管理。内容非常全，可以应用到实际的项目中去。
+Spring Boot 整合 Shiro 完成认证与授权的 demo，使用 Redis 进行会话管理。内容非常全，可以应用到实际的项目中去。<br>
+
+地址：https://github.com/zchen96/springboot-study/tree/master/springboot-shiro
